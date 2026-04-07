@@ -17,7 +17,7 @@ async function getSettings() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const siteName = settings?.siteName || 'My Blog';
+  const siteName = settings?.siteName || 'My Blogs';
   const description = settings?.seo?.defaultMetaDescription || settings?.siteDescription || 'A modern blog platform';
   const ogImage = settings?.seo?.defaultOgImage || settings?.logo || '';
   const siteUrl = settings?.seo?.siteUrl || '';
