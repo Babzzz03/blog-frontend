@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "categories": "Categories",
+    "contact": "Contact",
+    "search": "Search",
+    "login": "Log in",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "signout": "Sign out"
+  },
+  "hero": {
+    "search_placeholder": "Search posts...",
+    "search_btn": "Search",
+    "latest": "Latest",
+    "filter": "Filter:"
+  },
+  "blog": {
+    "title": "Our Blog",
+    "subtitle": "Discover stories, thinking, and expertise from writers on any topic.",
+    "search_placeholder": "Search articles...",
+    "articles": "articles",
+    "no_posts": "No posts found.",
+    "loading": "Loading posts...",
+    "load_more": "Load More Articles",
+    "read_more": "Read More",
+    "latest": "Latest",
+    "popular": "Most Popular",
+    "all": "All",
+    "back_to_blog": "Back to Blog",
+    "table_of_contents": "Table of Contents",
+    "likes": "Likes",
+    "like": "Like",
+    "comments": "Comments",
+    "page": "Page",
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "categories": {
+    "title": "Browse by Category",
+    "loading": "Loading categories...",
+    "none": "No categories yet."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent!",
+    "error": "Failed to send message."
+  },
+  "subscribe": {
+    "title": "Stay Updated",
+    "subtitle": "Get the latest posts delivered to your inbox.",
+    "placeholder": "Enter your email",
+    "btn": "Subscribe",
+    "subscribing": "Subscribing...",
+    "success": "You're subscribed!",
+    "already": "Already subscribed.",
+    "error": "Failed to subscribe."
+  },
+  "auth": {
+    "login_title": "Welcome back",
+    "login_subtitle": "Sign in to your account",
+    "register_title": "Create an account",
+    "register_subtitle": "Join our community",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "login_btn": "Sign in",
+    "register_btn": "Create account",
+    "no_account": "Don't have an account?",
+    "has_account": "Already have an account?",
+    "signing_in": "Signing in...",
+    "registering": "Creating account..."
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong.",
+    "min_read": "min read"
+  }
+}

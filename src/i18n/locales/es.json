@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "blog": "Blog",
+    "categories": "Categorías",
+    "contact": "Contacto",
+    "search": "Buscar",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "dashboard": "Panel de control",
+    "signout": "Cerrar sesión"
+  },
+  "hero": {
+    "search_placeholder": "Buscar artículos...",
+    "search_btn": "Buscar",
+    "latest": "Reciente",
+    "filter": "Filtrar:"
+  },
+  "blog": {
+    "title": "Nuestro Blog",
+    "subtitle": "Descubre historias, ideas y experiencia de escritores sobre cualquier tema.",
+    "search_placeholder": "Buscar artículos...",
+    "articles": "artículos",
+    "no_posts": "No se encontraron publicaciones.",
+    "loading": "Cargando...",
+    "load_more": "Cargar más artículos",
+    "read_more": "Leer más",
+    "latest": "Recientes",
+    "popular": "Más populares",
+    "all": "Todos",
+    "back_to_blog": "Volver al blog",
+    "table_of_contents": "Tabla de contenidos",
+    "likes": "Me gusta",
+    "like": "Me gusta",
+    "comments": "Comentarios",
+    "page": "Página",
+    "of": "de",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "categories": {
+    "title": "Explorar por categoría",
+    "loading": "Cargando categorías...",
+    "none": "Aún no hay categorías."
+  },
+  "contact": {
+    "title": "Contáctenos",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado!",
+    "error": "Error al enviar el mensaje."
+  },
+  "subscribe": {
+    "title": "Mantente al día",
+    "subtitle": "Recibe las últimas publicaciones en tu bandeja de entrada.",
+    "placeholder": "Ingresa tu correo",
+    "btn": "Suscribirse",
+    "subscribing": "Suscribiéndose...",
+    "success": "¡Estás suscrito!",
+    "already": "Ya estás suscrito.",
+    "error": "Error al suscribirse."
+  },
+  "auth": {
+    "login_title": "Bienvenido de nuevo",
+    "login_subtitle": "Inicia sesión en tu cuenta",
+    "register_title": "Crear una cuenta",
+    "register_subtitle": "Únete a nuestra comunidad",
+    "username": "Nombre de usuario",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "login_btn": "Iniciar sesión",
+    "register_btn": "Crear cuenta",
+    "no_account": "¿No tienes cuenta?",
+    "has_account": "¿Ya tienes cuenta?",
+    "signing_in": "Iniciando sesión...",
+    "registering": "Creando cuenta..."
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal.",
+    "min_read": "min de lectura"
+  }
+}

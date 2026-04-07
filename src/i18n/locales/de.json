@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "blog": "Blog",
+    "categories": "Kategorien",
+    "contact": "Kontakt",
+    "search": "Suchen",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "dashboard": "Dashboard",
+    "signout": "Abmelden"
+  },
+  "hero": {
+    "search_placeholder": "Beiträge suchen...",
+    "search_btn": "Suchen",
+    "latest": "Neueste",
+    "filter": "Filtern:"
+  },
+  "blog": {
+    "title": "Unser Blog",
+    "subtitle": "Entdecken Sie Geschichten, Gedanken und Fachwissen von Autoren zu jedem Thema.",
+    "search_placeholder": "Artikel suchen...",
+    "articles": "Artikel",
+    "no_posts": "Keine Beiträge gefunden.",
+    "loading": "Beiträge werden geladen...",
+    "load_more": "Mehr Artikel laden",
+    "read_more": "Weiterlesen",
+    "latest": "Neueste",
+    "popular": "Beliebteste",
+    "all": "Alle",
+    "back_to_blog": "Zurück zum Blog",
+    "table_of_contents": "Inhaltsverzeichnis",
+    "likes": "Gefällt mir",
+    "like": "Gefällt mir",
+    "comments": "Kommentare",
+    "page": "Seite",
+    "of": "von",
+    "previous": "Zurück",
+    "next": "Weiter"
+  },
+  "categories": {
+    "title": "Nach Kategorie durchsuchen",
+    "loading": "Kategorien werden geladen...",
+    "none": "Noch keine Kategorien."
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "name": "Name",
+    "email": "E-Mail",
+    "message": "Nachricht",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet...",
+    "success": "Nachricht gesendet!",
+    "error": "Nachricht konnte nicht gesendet werden."
+  },
+  "subscribe": {
+    "title": "Bleiben Sie auf dem Laufenden",
+    "subtitle": "Erhalten Sie die neuesten Beiträge in Ihrem Posteingang.",
+    "placeholder": "E-Mail eingeben",
+    "btn": "Abonnieren",
+    "subscribing": "Wird abonniert...",
+    "success": "Sie sind abonniert!",
+    "already": "Bereits abonniert.",
+    "error": "Abonnieren fehlgeschlagen."
+  },
+  "auth": {
+    "login_title": "Willkommen zurück",
+    "login_subtitle": "Melden Sie sich bei Ihrem Konto an",
+    "register_title": "Konto erstellen",
+    "register_subtitle": "Treten Sie unserer Community bei",
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "login_btn": "Anmelden",
+    "register_btn": "Konto erstellen",
+    "no_account": "Noch kein Konto?",
+    "has_account": "Bereits ein Konto?",
+    "signing_in": "Wird angemeldet...",
+    "registering": "Konto wird erstellt..."
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Etwas ist schiefgelaufen.",
+    "min_read": "Min. Lesezeit"
+  }
+}

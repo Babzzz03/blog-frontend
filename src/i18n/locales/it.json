@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "categories": "Categorie",
+    "contact": "Contatti",
+    "search": "Cerca",
+    "login": "Accedi",
+    "register": "Registrati",
+    "dashboard": "Dashboard",
+    "signout": "Esci"
+  },
+  "hero": {
+    "search_placeholder": "Cerca articoli...",
+    "search_btn": "Cerca",
+    "latest": "Recenti",
+    "filter": "Filtra:"
+  },
+  "blog": {
+    "title": "Il Nostro Blog",
+    "subtitle": "Scopri storie, idee e competenze da scrittori su qualsiasi argomento.",
+    "search_placeholder": "Cerca articoli...",
+    "articles": "articoli",
+    "no_posts": "Nessun articolo trovato.",
+    "loading": "Caricamento articoli...",
+    "load_more": "Carica altri articoli",
+    "read_more": "Leggi di più",
+    "latest": "Recenti",
+    "popular": "Più popolari",
+    "all": "Tutti",
+    "back_to_blog": "Torna al blog",
+    "table_of_contents": "Indice",
+    "likes": "Mi piace",
+    "like": "Mi piace",
+    "comments": "Commenti",
+    "page": "Pagina",
+    "of": "di",
+    "previous": "Precedente",
+    "next": "Successivo"
+  },
+  "categories": {
+    "title": "Sfoglia per categoria",
+    "loading": "Caricamento categorie...",
+    "none": "Nessuna categoria ancora."
+  },
+  "contact": {
+    "title": "Contattaci",
+    "name": "Nome",
+    "email": "E-mail",
+    "message": "Messaggio",
+    "send": "Invia messaggio",
+    "sending": "Invio in corso...",
+    "success": "Messaggio inviato!",
+    "error": "Invio del messaggio fallito."
+  },
+  "subscribe": {
+    "title": "Resta aggiornato",
+    "subtitle": "Ricevi gli ultimi articoli nella tua casella di posta.",
+    "placeholder": "Inserisci la tua e-mail",
+    "btn": "Iscriviti",
+    "subscribing": "Iscrizione in corso...",
+    "success": "Sei iscritto!",
+    "already": "Già iscritto.",
+    "error": "Iscrizione fallita."
+  },
+  "auth": {
+    "login_title": "Bentornato",
+    "login_subtitle": "Accedi al tuo account",
+    "register_title": "Crea un account",
+    "register_subtitle": "Unisciti alla nostra community",
+    "username": "Nome utente",
+    "email": "E-mail",
+    "password": "Password",
+    "login_btn": "Accedi",
+    "register_btn": "Crea account",
+    "no_account": "Non hai un account?",
+    "has_account": "Hai già un account?",
+    "signing_in": "Accesso in corso...",
+    "registering": "Creazione account..."
+  },
+  "footer": {
+    "rights": "Tutti i diritti riservati."
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Qualcosa è andato storto.",
+    "min_read": "min di lettura"
+  }
+}

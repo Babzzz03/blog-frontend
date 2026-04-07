@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "blog": "ブログ",
+    "categories": "カテゴリー",
+    "contact": "お問い合わせ",
+    "search": "検索",
+    "login": "ログイン",
+    "register": "登録",
+    "dashboard": "ダッシュボード",
+    "signout": "ログアウト"
+  },
+  "hero": {
+    "search_placeholder": "記事を検索...",
+    "search_btn": "検索",
+    "latest": "最新",
+    "filter": "フィルター："
+  },
+  "blog": {
+    "title": "私たちのブログ",
+    "subtitle": "あらゆるトピックの著者によるストーリー、思考、専門知識をご覧ください。",
+    "search_placeholder": "記事を検索...",
+    "articles": "記事",
+    "no_posts": "記事が見つかりません。",
+    "loading": "記事を読み込み中...",
+    "load_more": "さらに記事を読み込む",
+    "read_more": "続きを読む",
+    "latest": "最新",
+    "popular": "人気",
+    "all": "すべて",
+    "back_to_blog": "ブログに戻る",
+    "table_of_contents": "目次",
+    "likes": "いいね",
+    "like": "いいね",
+    "comments": "コメント",
+    "page": "ページ",
+    "of": "/",
+    "previous": "前へ",
+    "next": "次へ"
+  },
+  "categories": {
+    "title": "カテゴリーで閲覧",
+    "loading": "カテゴリーを読み込み中...",
+    "none": "カテゴリーはまだありません。"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "name": "名前",
+    "email": "メールアドレス",
+    "message": "メッセージ",
+    "send": "メッセージを送信",
+    "sending": "送信中...",
+    "success": "メッセージを送信しました！",
+    "error": "メッセージの送信に失敗しました。"
+  },
+  "subscribe": {
+    "title": "最新情報を入手",
+    "subtitle": "最新の記事をメールで受け取りましょう。",
+    "placeholder": "メールアドレスを入力",
+    "btn": "購読する",
+    "subscribing": "購読中...",
+    "success": "購読しました！",
+    "already": "すでに購読済みです。",
+    "error": "購読に失敗しました。"
+  },
+  "auth": {
+    "login_title": "おかえりなさい",
+    "login_subtitle": "アカウントにログイン",
+    "register_title": "アカウントを作成",
+    "register_subtitle": "コミュニティに参加する",
+    "username": "ユーザー名",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "login_btn": "ログイン",
+    "register_btn": "アカウントを作成",
+    "no_account": "アカウントをお持ちでないですか？",
+    "has_account": "すでにアカウントをお持ちですか？",
+    "signing_in": "ログイン中...",
+    "registering": "アカウント作成中..."
+  },
+  "footer": {
+    "rights": "全著作権所有。"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました。",
+    "min_read": "分で読める"
+  }
+}
