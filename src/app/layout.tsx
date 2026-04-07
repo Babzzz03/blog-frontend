@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 
 export const metadata: Metadata = {
   title: 'My Blog',
-  description: 'A modern full-stack blog platform',
+  description: 'A modern blog platform',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
