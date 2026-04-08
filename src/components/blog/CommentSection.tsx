@@ -89,10 +89,10 @@ export default function CommentSection({ postId }: Props) {
       return;
     }
     try {
-      const updated = await commentService.likeComment(commentId);
+      await commentService.likeComment(commentId);
       loadComments();
-    } catch {
-      // silent
+    } catch (err: any) {
+      toast({ title: 'Error', description: err.message, variant: 'destructive' });
     }
   };
 

@@ -28,6 +28,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     }
     setIsLoading(false);
+
+    // When apiClient receives a 401 (cookie expired/missing), sign out
+    const handleSignout = () => {
+      setUser(null);
+      localStorage.removeItem('blog_user');
+    };
+    window.addEventListener('auth:signout', handleSignout);
+    return () => window.removeEventListener('auth:signout', handleSignout);
   }, []);
 
   const signin = async (email: string, password: string): Promise<User> => {

@@ -27,6 +27,11 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
   const data = await res.json();
 
   if (!res.ok) {
+    if (res.status === 401) {
+      // Cookie expired or missing — clear stale user data and notify the app
+      localStorage.removeItem('blog_user');
+      window.dispatchEvent(new Event('auth:signout'));
+    }
     throw new Error(data.message || 'Something went wrong');
   }
 

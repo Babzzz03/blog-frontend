@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import TipTap from '@/components/editor/TipTap';
+import ImageUpload from '@/components/common/ImageUpload';
 import AiWritingPanel from '@/components/dashboard/AiWritingPanel';
 import SeoPanel, { SeoData } from '@/components/dashboard/SeoPanel';
 import { useToast } from '@/hooks/use-toast';
@@ -183,12 +184,11 @@ export default function EditPostPage() {
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="image">Cover Image URL</Label>
-                <Input id="image" name="image" value={formData.image} onChange={handleChange} placeholder="https://example.com/image.jpg" />
-                {formData.image && (
-                  <img src={formData.image} alt="cover preview" className="h-32 w-full object-cover rounded-md border mt-1"
-                    onError={(e) => (e.currentTarget.style.display = 'none')} />
-                )}
+                <Label>Cover Image</Label>
+                <ImageUpload
+                  value={formData.image}
+                  onChange={(url) => setFormData((prev) => ({ ...prev, image: url }))}
+                />
               </div>
 
               <div className="space-y-1.5">

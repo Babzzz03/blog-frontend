@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-wrap justify-between gap-8">
           <div className="w-full md:w-1/3">
-            <h2 className="text-2xl font-bold mb-4">My Blog</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4">My Blog</h2>
             <p className="text-gray-400">A beautiful and modern blog platform showcasing thoughts and expertise.</p>
           </div>
           <div>

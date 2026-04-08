@@ -29,7 +29,7 @@ export default function LayoutModern({
         <div className="container mx-auto px-4 py-16 text-center">
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
             <Badge className="mb-4">{settings?.siteName || 'Our Blog'}</Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-4 leading-tight">
               {hp?.heroTitle || 'Insights & Inspiration'}
             </h1>
             {hp?.heroSubtitle && (
@@ -78,7 +78,7 @@ export default function LayoutModern({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
                   <Badge className="mb-2 bg-primary/90">{featuredPost.category}</Badge>
-                  <h2 className="text-2xl md:text-4xl font-bold mb-2 max-w-2xl">{featuredPost.title}</h2>
+                  <h2 className="text-xl md:text-2xl lg:text-4xl font-bold mb-2 max-w-2xl">{featuredPost.title}</h2>
                   <p className="text-sm text-white/70 flex items-center gap-3">
                     <span>{format(new Date(featuredPost.createdAt), 'MMM d, yyyy')}</span>
                     <span className="flex items-center gap-1"><Eye className="h-3.5 w-3.5" />{(featuredPost as any).views ?? 0}</span>

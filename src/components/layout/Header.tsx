@@ -71,9 +71,9 @@ export default function Header() {
       >
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-gray-800">
+            <Link href="/" className="flex items-center gap-2 text-lg md:text-2xl font-bold text-gray-800">
               {logoUrl
-                ? <img src={logoUrl} alt={siteName} className="h-8 w-auto object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                ? <img src={logoUrl} alt={siteName} className="h-6 md:h-8 w-auto object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 : null}
               {siteName}
             </Link>

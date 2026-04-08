@@ -38,7 +38,7 @@ export default function LayoutCards({
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}>
             <p className="text-xs font-semibold uppercase tracking-widest mb-2 opacity-60">{settings?.siteName || 'Blog'}</p>
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl mb-4">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl font-extrabold leading-tight max-w-3xl mb-4">
               {hp?.heroTitle || 'Ideas Worth Reading'}
             </h1>
             {hp?.heroSubtitle && (

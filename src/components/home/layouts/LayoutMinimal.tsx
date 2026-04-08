@@ -25,7 +25,7 @@ export default function LayoutMinimal({
         <div className="container mx-auto px-4 py-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
             <div>
-              <h1 className="text-5xl md:text-6xl font-extrabold leading-none tracking-tight mb-3">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-none tracking-tight mb-3">
                 {hp?.heroTitle || settings?.siteName || 'The Blog'}
               </h1>
               {(hp?.showNewsletter !== false) && (

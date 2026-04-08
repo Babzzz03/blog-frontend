@@ -50,7 +50,7 @@ export default function LayoutMagazine({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 p-5 text-white">
                   <Badge className="mb-2 bg-primary text-primary-foreground text-xs">{hero.category}</Badge>
-                  <h2 className="text-xl md:text-2xl font-bold leading-tight mb-2">{hero.title}</h2>
+                  <h2 className="text-lg md:text-xl lg:text-2xl font-bold leading-tight mb-2">{hero.title}</h2>
                   <p className="text-xs text-white/70 flex items-center gap-2">
                     <span>{hero.author?.name || 'Author'}</span>·
                     <span>{formatDistanceToNow(new Date(hero.createdAt), { addSuffix: true })}</span>·

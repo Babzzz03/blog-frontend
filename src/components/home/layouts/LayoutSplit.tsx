@@ -35,7 +35,7 @@ export default function LayoutSplit({
       <div className="border-b border-border">
         <div className="container mx-auto px-4 py-10">
           <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-2">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2">
               {hp?.heroTitle || settings?.siteName || 'Our Blog'}
             </h1>
             {hp?.heroSubtitle && (
@@ -52,7 +52,7 @@ export default function LayoutSplit({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
                   <Badge className="mb-2 bg-primary/90 text-xs">{featured.category}</Badge>
-                  <h2 className="text-xl md:text-2xl font-bold leading-tight mb-2">{featured.title}</h2>
+                  <h2 className="text-lg md:text-xl lg:text-2xl font-bold leading-tight mb-2">{featured.title}</h2>
                   {(featured as any).excerpt && (
                     <p className="text-sm text-white/80 line-clamp-2 mb-2">{(featured as any).excerpt}</p>
                   )}
