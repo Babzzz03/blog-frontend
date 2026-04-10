@@ -9,11 +9,14 @@ type RequestOptions = {
 async function request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
   const { method = 'GET', body, headers = {} } = options;
 
+  const token = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
+
   const config: RequestInit = {
     method,
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...headers,
     },
   };

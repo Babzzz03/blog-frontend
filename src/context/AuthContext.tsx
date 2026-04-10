@@ -29,10 +29,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     setIsLoading(false);
 
-    // When apiClient receives a 401 (cookie expired/missing), sign out
+    // When apiClient receives a 401 (token expired/missing), sign out
     const handleSignout = () => {
       setUser(null);
       localStorage.removeItem('blog_user');
+      sessionStorage.removeItem('accessToken');
     };
     window.addEventListener('auth:signout', handleSignout);
     return () => window.removeEventListener('auth:signout', handleSignout);
@@ -40,15 +41,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signin = async (email: string, password: string): Promise<User> => {
     const userData = await authService.signin({ email, password });
-    setUser(userData);
-    localStorage.setItem('blog_user', JSON.stringify(userData));
-    return userData;
+    const { token, ...user } = userData as any;
+    if (token) sessionStorage.setItem('accessToken', token);
+    setUser(user);
+    localStorage.setItem('blog_user', JSON.stringify(user));
+    return user;
   };
 
   const signout = async () => {
     await authService.signout();
     setUser(null);
     localStorage.removeItem('blog_user');
+    sessionStorage.removeItem('accessToken');
   };
 
   const updateUser = (data: Partial<User>) => {
