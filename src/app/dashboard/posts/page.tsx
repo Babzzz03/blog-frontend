@@ -71,25 +71,30 @@ export default function ManagePostsPage() {
 
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
+  const statusVariant = (status: string) =>
+    status === 'published' ? 'default' : status === 'draft' ? 'secondary' : 'outline';
+
   return (
     <div>
-      <h1 className="text-3xl font-semibold mb-6">Manage Posts</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold mb-6">Manage Posts</h1>
 
       <Card>
         <CardHeader>
           <CardTitle>All Posts</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex justify-between items-center mb-4 gap-2">
-            <form onSubmit={handleSearch} className="flex gap-2 flex-1 max-w-sm">
+          {/* Search + New Post */}
+          <div className="flex flex-col sm:flex-row gap-2 mb-4">
+            <form onSubmit={handleSearch} className="flex gap-2 flex-1">
               <Input
                 placeholder="Search posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                className="flex-1"
               />
-              <Button type="submit" variant="outline">Search</Button>
+              <Button type="submit" variant="outline" className="shrink-0">Search</Button>
             </form>
-            <Button asChild>
+            <Button asChild className="shrink-0">
               <Link href="/dashboard/posts/create">
                 <Plus className="mr-2 h-4 w-4" /> New Post
               </Link>
@@ -101,65 +106,105 @@ export default function ManagePostsPage() {
           ) : posts.length === 0 ? (
             <p className="text-center py-8 text-muted-foreground">No posts found.</p>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Likes</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+            <>
+              {/* Mobile card list */}
+              <div className="md:hidden space-y-3">
                 {posts.map((post) => {
                   const status = (post as any).status || 'published';
-                  const statusVariant =
-                    status === 'published' ? 'default' :
-                    status === 'draft' ? 'secondary' : 'outline';
                   return (
-                  <TableRow key={post._id}>
-                    <TableCell className="font-medium max-w-[200px] truncate">{post.title}</TableCell>
-                    <TableCell>
-                      <Badge variant="secondary">{post.category}</Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={statusVariant} className="capitalize">{status}</Badge>
-                    </TableCell>
-                    <TableCell>{format(new Date(post.createdAt), 'MMM d, yyyy')}</TableCell>
-                    <TableCell>{post.numberOfLikes}</TableCell>
-                    <TableCell>
-                      <div className="flex space-x-1">
-                        <Button variant="ghost" size="icon" onClick={() => { setSelectedPost(post); setIsModalOpen(true); }}>
-                          <Eye className="h-4 w-4" />
+                    <div key={post._id} className="border rounded-lg p-3 space-y-2">
+                      <p className="font-medium text-sm leading-snug line-clamp-2">{post.title}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        <Badge variant="secondary" className="text-xs">{post.category}</Badge>
+                        <Badge variant={statusVariant(status)} className="text-xs capitalize">{status}</Badge>
+                        {(post as any).isPremium && <Badge variant="outline" className="text-xs">Premium</Badge>}
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>{format(new Date(post.createdAt), 'MMM d, yyyy')}</span>
+                        <span>{post.numberOfLikes} likes</span>
+                      </div>
+                      <div className="flex gap-1 pt-1 border-t">
+                        <Button variant="ghost" size="sm" className="h-8 px-2 flex-1"
+                          onClick={() => { setSelectedPost(post); setIsModalOpen(true); }}>
+                          <Eye className="h-3.5 w-3.5 mr-1" /> View
                         </Button>
-                        <Button variant="ghost" size="icon" asChild>
+                        <Button variant="ghost" size="sm" className="h-8 px-2 flex-1" asChild>
                           <Link href={`/dashboard/posts/${post._id}/edit`}>
-                            <Pencil className="h-4 w-4" />
+                            <Pencil className="h-3.5 w-3.5 mr-1" /> Edit
                           </Link>
                         </Button>
-                        <Button variant="ghost" size="icon" onClick={() => handleDelete(post)}>
-                          <Trash2 className="h-4 w-4 text-destructive" />
+                        <Button variant="ghost" size="sm" className="h-8 px-2 flex-1"
+                          onClick={() => handleDelete(post)}>
+                          <Trash2 className="h-3.5 w-3.5 mr-1 text-destructive" />
+                          <span className="text-destructive">Delete</span>
                         </Button>
                       </div>
-                    </TableCell>
-                  </TableRow>
+                    </div>
                   );
                 })}
-              </TableBody>
-            </Table>
+              </div>
+
+              {/* Desktop table */}
+              <div className="hidden md:block overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Title</TableHead>
+                      <TableHead>Category</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Likes</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {posts.map((post) => {
+                      const status = (post as any).status || 'published';
+                      return (
+                        <TableRow key={post._id}>
+                          <TableCell className="font-medium max-w-[200px] truncate">{post.title}</TableCell>
+                          <TableCell><Badge variant="secondary">{post.category}</Badge></TableCell>
+                          <TableCell><Badge variant={statusVariant(status)} className="capitalize">{status}</Badge></TableCell>
+                          <TableCell>{format(new Date(post.createdAt), 'MMM d, yyyy')}</TableCell>
+                          <TableCell>{post.numberOfLikes}</TableCell>
+                          <TableCell>
+                            <div className="flex space-x-1">
+                              <Button variant="ghost" size="icon"
+                                onClick={() => { setSelectedPost(post); setIsModalOpen(true); }}>
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              <Button variant="ghost" size="icon" asChild>
+                                <Link href={`/dashboard/posts/${post._id}/edit`}>
+                                  <Pencil className="h-4 w-4" />
+                                </Link>
+                              </Button>
+                              <Button variant="ghost" size="icon" onClick={() => handleDelete(post)}>
+                                <Trash2 className="h-4 w-4 text-destructive" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
+            </>
           )}
 
-          <div className="flex justify-between items-center mt-4">
-            <span className="text-sm text-muted-foreground">
-              {totalPosts} total posts
-            </span>
-            <div className="space-x-2">
-              <Button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1} variant="outline">
+          {/* Pagination */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
+            <span className="text-sm text-muted-foreground">{totalPosts} total posts</span>
+            <div className="flex gap-2">
+              <Button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={currentPage === 1} variant="outline" size="sm">
                 Previous
               </Button>
-              <Button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage >= totalPages} variant="outline">
+              <span className="flex items-center text-sm text-muted-foreground px-1">
+                {currentPage} / {totalPages || 1}
+              </span>
+              <Button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={currentPage >= totalPages} variant="outline" size="sm">
                 Next
               </Button>
             </div>
@@ -170,7 +215,7 @@ export default function ManagePostsPage() {
       <AnimatePresence>
         {isModalOpen && selectedPost && (
           <Dialog open={isModalOpen} onOpenChange={() => setIsModalOpen(false)}>
-            <DialogContent className="sm:max-w-[600px]">
+            <DialogContent className="sm:max-w-[600px] mx-4">
               <DialogHeader>
                 <DialogTitle>Post Details</DialogTitle>
               </DialogHeader>
@@ -178,25 +223,25 @@ export default function ManagePostsPage() {
                 <div className="space-y-3 py-2">
                   <div>
                     <Label className="text-xs text-muted-foreground">Title</Label>
-                    <p className="font-medium">{selectedPost.title}</p>
+                    <p className="font-medium text-sm">{selectedPost.title}</p>
                   </div>
                   <div>
                     <Label className="text-xs text-muted-foreground">Category</Label>
-                    <p>{selectedPost.category}</p>
+                    <p className="text-sm">{selectedPost.category}</p>
                   </div>
                   <div>
                     <Label className="text-xs text-muted-foreground">Slug</Label>
-                    <p className="text-sm font-mono">{selectedPost.slug}</p>
+                    <p className="text-sm font-mono break-all">{selectedPost.slug}</p>
                   </div>
                   <div>
                     <Label className="text-xs text-muted-foreground">Created</Label>
-                    <p>{format(new Date(selectedPost.createdAt), 'PPP')}</p>
+                    <p className="text-sm">{format(new Date(selectedPost.createdAt), 'PPP')}</p>
                   </div>
                 </div>
               </motion.div>
-              <DialogFooter>
-                <Button variant="outline" onClick={() => setIsModalOpen(false)}>Close</Button>
-                <Button asChild>
+              <DialogFooter className="flex-col sm:flex-row gap-2">
+                <Button variant="outline" onClick={() => setIsModalOpen(false)} className="w-full sm:w-auto">Close</Button>
+                <Button asChild className="w-full sm:w-auto">
                   <Link href={`/blog/${selectedPost.slug}`}>View Post</Link>
                 </Button>
               </DialogFooter>

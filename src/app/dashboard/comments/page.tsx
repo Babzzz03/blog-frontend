@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-import { Trash, Edit } from 'lucide-react';
+import { Trash, Edit, ThumbsUp } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { commentService } from '@/services/comment.service';
 import { Comment } from '@/types';
@@ -74,7 +74,7 @@ export default function ManageCommentsPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold mb-6">Manage Comments</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold mb-6">Manage Comments</h1>
 
       <Card>
         <CardHeader>
@@ -95,46 +95,84 @@ export default function ManageCommentsPage() {
           ) : filtered.length === 0 ? (
             <p className="text-center py-8 text-muted-foreground">No comments found.</p>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Content</TableHead>
-                  <TableHead>User ID</TableHead>
-                  <TableHead>Likes</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+            <>
+              {/* Mobile card list */}
+              <div className="md:hidden space-y-3">
                 {filtered.map((comment) => (
-                  <TableRow key={comment._id}>
-                    <TableCell className="max-w-[250px] truncate">{comment.content}</TableCell>
-                    <TableCell className="font-mono text-xs">{comment.userId.slice(-8)}</TableCell>
-                    <TableCell>{comment.numberOfLikes}</TableCell>
-                    <TableCell>{format(new Date(comment.createdAt), 'MMM d, yyyy')}</TableCell>
-                    <TableCell>
-                      <div className="flex space-x-1">
-                        <Button variant="ghost" size="icon" onClick={() => setEditTarget({ id: comment._id, content: comment.content })}>
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" onClick={() => handleDelete(comment._id)}>
-                          <Trash className="h-4 w-4 text-destructive" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
+                  <div key={comment._id} className="border rounded-lg p-3 space-y-2">
+                    <p className="text-sm line-clamp-3">{comment.content}</p>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span className="font-mono">#{comment.userId.slice(-8)}</span>
+                      <span className="flex items-center gap-1">
+                        <ThumbsUp className="h-3 w-3" /> {comment.numberOfLikes}
+                      </span>
+                      <span>{format(new Date(comment.createdAt), 'MMM d, yyyy')}</span>
+                    </div>
+                    <div className="flex gap-2 pt-1 border-t">
+                      <Button variant="outline" size="sm" className="flex-1 h-8"
+                        onClick={() => setEditTarget({ id: comment._id, content: comment.content })}>
+                        <Edit className="h-3.5 w-3.5 mr-1" /> Edit
+                      </Button>
+                      <Button variant="outline" size="sm" className="flex-1 h-8 text-destructive border-destructive/30"
+                        onClick={() => handleDelete(comment._id)}>
+                        <Trash className="h-3.5 w-3.5 mr-1" /> Delete
+                      </Button>
+                    </div>
+                  </div>
                 ))}
-              </TableBody>
-            </Table>
+              </div>
+
+              {/* Desktop table */}
+              <div className="hidden md:block overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Content</TableHead>
+                      <TableHead>User ID</TableHead>
+                      <TableHead>Likes</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filtered.map((comment) => (
+                      <TableRow key={comment._id}>
+                        <TableCell className="max-w-[250px] truncate">{comment.content}</TableCell>
+                        <TableCell className="font-mono text-xs">{comment.userId.slice(-8)}</TableCell>
+                        <TableCell>{comment.numberOfLikes}</TableCell>
+                        <TableCell>{format(new Date(comment.createdAt), 'MMM d, yyyy')}</TableCell>
+                        <TableCell>
+                          <div className="flex space-x-1">
+                            <Button variant="ghost" size="icon"
+                              onClick={() => setEditTarget({ id: comment._id, content: comment.content })}>
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon" onClick={() => handleDelete(comment._id)}>
+                              <Trash className="h-4 w-4 text-destructive" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </>
           )}
 
-          <div className="flex justify-between items-center mt-4">
+          {/* Pagination */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
             <span className="text-sm text-muted-foreground">{totalComments} total comments</span>
-            <div className="space-x-2">
-              <Button variant="outline" onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
+            <div className="flex gap-2">
+              <Button variant="outline" size="sm"
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
                 Previous
               </Button>
-              <Button variant="outline" onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage >= totalPages}>
+              <span className="flex items-center text-sm text-muted-foreground px-1">
+                {currentPage} / {totalPages || 1}
+              </span>
+              <Button variant="outline" size="sm"
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage >= totalPages}>
                 Next
               </Button>
             </div>
@@ -143,16 +181,16 @@ export default function ManageCommentsPage() {
       </Card>
 
       <Dialog open={editTarget !== null} onOpenChange={() => setEditTarget(null)}>
-        <DialogContent>
+        <DialogContent className="mx-4 sm:mx-auto">
           <DialogHeader><DialogTitle>Edit Comment</DialogTitle></DialogHeader>
           <Textarea
             value={editTarget?.content || ''}
             onChange={(e) => setEditTarget((prev) => prev ? { ...prev, content: e.target.value } : null)}
             rows={4}
           />
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setEditTarget(null)}>Cancel</Button>
-            <Button onClick={handleSaveEdit}>Save Changes</Button>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setEditTarget(null)} className="w-full sm:w-auto">Cancel</Button>
+            <Button onClick={handleSaveEdit} className="w-full sm:w-auto">Save Changes</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

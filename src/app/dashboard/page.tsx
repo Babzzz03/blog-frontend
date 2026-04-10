@@ -22,7 +22,7 @@ import { commentService } from '@/services/comment.service';
 import { apiClient } from '@/lib/api-client';
 import { useAuth } from '@/context/AuthContext';
 import { Post, Comment } from '@/types';
-import { Eye, Heart, FileText, MessageSquare, TrendingUp, Users } from 'lucide-react';
+import { Eye, Heart, FileText, MessageSquare, TrendingUp } from 'lucide-react';
 import { format } from 'date-fns';
 
 ChartJS.register(
@@ -83,41 +83,23 @@ export default function DashboardPage() {
     loadData();
   }, [user]);
 
-  // ── Stat cards ─────────────────────────────────────────────────────────────
   const statCards = [
-    { title: 'Published Posts', value: adminStats?.counts.published ?? basicStats.totalPosts, icon: <FileText className="h-5 w-5 text-green-600" />, sub: `+${basicStats.lastMonthPosts} this month` },
+    { title: 'Published', value: adminStats?.counts.published ?? basicStats.totalPosts, icon: <FileText className="h-5 w-5 text-green-600" />, sub: `+${basicStats.lastMonthPosts} this month` },
     { title: 'Drafts', value: adminStats?.counts.drafts ?? 0, icon: <FileText className="h-5 w-5 text-yellow-500" />, sub: 'Unpublished' },
     { title: 'Scheduled', value: adminStats?.counts.scheduled ?? 0, icon: <TrendingUp className="h-5 w-5 text-blue-500" />, sub: 'Queued' },
-    { title: 'Total Comments', value: basicStats.totalComments, icon: <MessageSquare className="h-5 w-5 text-primary" />, sub: `+${basicStats.lastMonthComments} this month` },
+    { title: 'Comments', value: basicStats.totalComments, icon: <MessageSquare className="h-5 w-5 text-primary" />, sub: `+${basicStats.lastMonthComments} this month` },
   ];
 
-  // ── Category bar chart (real) ──────────────────────────────────────────────
   const categoryLabels = adminStats?.byCategory.map((c) => c._id || 'Uncategorized') ?? [];
   const barChartData = {
     labels: categoryLabels,
     datasets: [
-      {
-        label: 'Posts',
-        data: adminStats?.byCategory.map((c) => c.count) ?? [],
-        backgroundColor: 'rgba(249,115,22,0.75)',
-        borderRadius: 4,
-      },
-      {
-        label: 'Total Views',
-        data: adminStats?.byCategory.map((c) => c.totalViews) ?? [],
-        backgroundColor: 'rgba(59,130,246,0.75)',
-        borderRadius: 4,
-      },
-      {
-        label: 'Total Likes',
-        data: adminStats?.byCategory.map((c) => c.totalLikes) ?? [],
-        backgroundColor: 'rgba(124,58,237,0.75)',
-        borderRadius: 4,
-      },
+      { label: 'Posts', data: adminStats?.byCategory.map((c) => c.count) ?? [], backgroundColor: 'rgba(249,115,22,0.75)', borderRadius: 4 },
+      { label: 'Views', data: adminStats?.byCategory.map((c) => c.totalViews) ?? [], backgroundColor: 'rgba(59,130,246,0.75)', borderRadius: 4 },
+      { label: 'Likes', data: adminStats?.byCategory.map((c) => c.totalLikes) ?? [], backgroundColor: 'rgba(124,58,237,0.75)', borderRadius: 4 },
     ],
   };
 
-  // ── Category pie chart (real) ──────────────────────────────────────────────
   const pieChartData = {
     labels: categoryLabels,
     datasets: [{
@@ -128,7 +110,6 @@ export default function DashboardPage() {
     }],
   };
 
-  // ── Engagement pie (views vs likes vs comments) ───────────────────────────
   const totalViews = adminStats?.byCategory.reduce((a, c) => a + c.totalViews, 0) ?? 0;
   const totalLikes = adminStats?.byCategory.reduce((a, c) => a + c.totalLikes, 0) ?? 0;
   const engagementPieData = {
@@ -143,74 +124,73 @@ export default function DashboardPage() {
 
   const pieOptions = {
     maintainAspectRatio: false,
-    plugins: { legend: { position: 'bottom' as const, labels: { boxWidth: 12, padding: 12, font: { size: 11 } } } },
+    plugins: { legend: { position: 'bottom' as const, labels: { boxWidth: 12, padding: 10, font: { size: 11 } } } },
   };
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold mb-6">Dashboard Overview</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold mb-6">Dashboard Overview</h1>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
         {statCards.map((stat) => (
           <Card key={stat.title}>
-            <CardContent className="pt-5 pb-4">
-              <div className="flex items-start justify-between mb-3">
-                <p className="text-sm text-muted-foreground">{stat.title}</p>
-                {stat.icon}
+            <CardContent className="pt-4 pb-3 px-4">
+              <div className="flex items-start justify-between mb-2">
+                <p className="text-xs sm:text-sm text-muted-foreground leading-tight">{stat.title}</p>
+                <span className="shrink-0 ml-1">{stat.icon}</span>
               </div>
-              <p className="text-3xl font-bold">{stat.value.toLocaleString()}</p>
-              <p className="text-xs text-muted-foreground mt-1">{stat.sub}</p>
+              <p className="text-2xl sm:text-3xl font-bold">{stat.value.toLocaleString()}</p>
+              <p className="text-xs text-muted-foreground mt-1 truncate">{stat.sub}</p>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Charts row */}
+      {/* Charts */}
       {adminStats && (
         <>
-          {/* Bar chart — posts/views/likes by category */}
+          {/* Bar chart */}
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5" /> Posts, Views & Likes by Category
+              <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" /> Posts, Views & Likes by Category
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-[280px]">
+              <div className="h-[220px] sm:h-[280px] w-full overflow-hidden">
                 <Bar
                   data={barChartData}
                   options={{
                     maintainAspectRatio: false,
-                    plugins: { legend: { position: 'top' } },
-                    scales: { x: { stacked: false }, y: { beginAtZero: true } },
+                    plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } } },
+                    scales: { x: { stacked: false, ticks: { font: { size: 10 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 } } } },
                   }}
                 />
               </div>
             </CardContent>
           </Card>
 
-          {/* Two pie charts side-by-side */}
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
+          {/* Pie charts */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Posts Distribution by Category</CardTitle>
+                <CardTitle className="text-sm sm:text-base">Posts by Category</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="h-[240px]">
+                <div className="h-[200px] sm:h-[240px]">
                   {categoryLabels.length > 0
                     ? <Pie data={pieChartData} options={pieOptions} />
                     : <p className="text-sm text-muted-foreground text-center pt-10">No category data yet.</p>}
                 </div>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Overall Engagement Breakdown</CardTitle>
+                <CardTitle className="text-sm sm:text-base">Engagement Breakdown</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="h-[240px]">
+                <div className="h-[200px] sm:h-[240px]">
                   {(totalViews + totalLikes + basicStats.totalComments) > 0
                     ? <Pie data={engagementPieData} options={pieOptions} />
                     : <p className="text-sm text-muted-foreground text-center pt-10">No engagement data yet.</p>}
@@ -222,31 +202,34 @@ export default function DashboardPage() {
       )}
 
       {/* Recent activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-3">
-            <CardTitle className="text-base">Recent Posts</CardTitle>
-            <Link href="/dashboard/posts" className="text-xs text-primary hover:underline">View all</Link>
+            <CardTitle className="text-sm sm:text-base">Recent Posts</CardTitle>
+            <Link href="/dashboard/posts" className="text-xs text-primary hover:underline shrink-0">View all</Link>
           </CardHeader>
           <CardContent>
             {recentPosts.length === 0 ? (
               <p className="text-sm text-muted-foreground">No posts yet.</p>
             ) : (
               <ul className="space-y-3">
-                {recentPosts.map((post) => (
-                  <li key={post._id} className="flex justify-between items-start gap-2">
-                    <span className="font-medium text-sm line-clamp-1 flex-1">{post.title}</span>
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <Badge variant="secondary" className="text-xs">{post.category}</Badge>
-                      <Badge
-                        variant={(post as any).status === 'published' ? 'default' : (post as any).status === 'draft' ? 'secondary' : 'outline'}
-                        className="text-xs capitalize"
-                      >
-                        {(post as any).status || 'published'}
-                      </Badge>
-                    </div>
-                  </li>
-                ))}
+                {recentPosts.map((post) => {
+                  const status = (post as any).status || 'published';
+                  return (
+                    <li key={post._id} className="space-y-1">
+                      <span className="font-medium text-sm line-clamp-1">{post.title}</span>
+                      <div className="flex flex-wrap gap-1">
+                        <Badge variant="secondary" className="text-xs">{post.category}</Badge>
+                        <Badge
+                          variant={status === 'published' ? 'default' : status === 'draft' ? 'secondary' : 'outline'}
+                          className="text-xs capitalize"
+                        >
+                          {status}
+                        </Badge>
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </CardContent>
@@ -254,7 +237,7 @@ export default function DashboardPage() {
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">Recent Comments</CardTitle>
+            <CardTitle className="text-sm sm:text-base">Recent Comments</CardTitle>
           </CardHeader>
           <CardContent>
             {recentComments.length === 0 ? (
@@ -275,23 +258,23 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      {/* Top performing posts */}
+      {/* Top viewed posts */}
       {adminStats && adminStats.topViewed.length > 0 && (
-        <Card className="mt-6">
+        <Card className="mt-4">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
+            <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
               <Eye className="h-4 w-4" /> Top Viewed Posts
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {adminStats.topViewed.slice(0, 5).map((p, i) => (
-                <div key={p.slug} className="flex items-center gap-3">
-                  <span className="text-muted-foreground text-xs w-4 shrink-0">{i + 1}.</span>
-                  <p className="text-sm font-medium flex-1 truncate">{p.title}</p>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground shrink-0">
+                <div key={p.slug} className="flex items-start gap-2">
+                  <span className="text-muted-foreground text-xs w-4 shrink-0 pt-0.5">{i + 1}.</span>
+                  <p className="text-sm font-medium flex-1 min-w-0 line-clamp-1">{p.title}</p>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground shrink-0">
                     <span className="flex items-center gap-1"><Eye className="h-3 w-3" /> {p.views.toLocaleString()}</span>
-                    <span className="flex items-center gap-1"><Heart className="h-3 w-3" /> {p.numberOfLikes}</span>
+                    <span className="hidden sm:flex items-center gap-1"><Heart className="h-3 w-3" /> {p.numberOfLikes}</span>
                   </div>
                 </div>
               ))}
